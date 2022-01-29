@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div className="App">
-      {t('First translation')}
+      {t('first translation')}
     </div>
   );
 }
