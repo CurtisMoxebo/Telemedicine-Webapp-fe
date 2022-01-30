@@ -1,13 +1,24 @@
 import './App.css';
-import { useTranslation } from 'react-i18next';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Index from './Components/Home/Index';
+import Layout from './Components/Layout/Layout';
+import Login from './Components/Authentication/Login';
 
-function App() {
-  const { t, i18n } = useTranslation();
-
+const App = () => {
   return (
-    <div className="App">
-      {t('first translation')}
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+
+        <Layout>
+          <Route exact path="/">
+            <Index />
+          </Route>
+        </Layout>
+      </Switch>
+    </Router>
   );
 }
 
