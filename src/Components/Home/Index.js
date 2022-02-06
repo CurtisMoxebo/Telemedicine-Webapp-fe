@@ -1,7 +1,15 @@
+import { Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+
 const Index = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <div>
-      Index
+      <Typography>
+        {t('first translation')}
+      </Typography>
+
     </div>
   );
 }
