@@ -1,14 +1,13 @@
 import { Container } from "@mui/material";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Layout = (props) => {
-
   return (
-    <Container disableGutters maxWidth="xl" sx={{ padding: 0 }}>
-      <div>
-        <Header />
-        {props.children}
-      </div>
+    <Container disableGutters maxWidth='true'>
+      <Header />
+      {props.children}
+      <Footer />
     </Container>
   );
 }

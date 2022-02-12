@@ -9,10 +9,11 @@ const defaultTheme = createTheme({
   palette: {
     primary: {
       main: '#06a3b8',
-    },
+      dark: '#048394'
+    }
   },
   typography: {
-    htmlFontSize: 14,
+    htmlFontSize: 16,
     fontFamily: 'Futura, Bold, Souvenir'
   }
 });
