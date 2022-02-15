@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Typography, Box, Grid, TextField, InputAdornment, Container, Button } from '@mui/material';
+import { Typography, Box, Grid, TextField, Autocomplete, Container, Button, Grow } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import MasksTwoToneIcon from '@mui/icons-material/MasksTwoTone';
-import LocationOnTwoToneIcon from '@mui/icons-material/LocationOnTwoTone';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import { makeStyles } from '@mui/styles';
+import { getRandomArray } from "../../Utils/Utils.js";
 
 const Index = () => {
+  const top100Films = getRandomArray();
+
   const useStyles = makeStyles(theme => ({
     headerBox: {
       height: 360,
       width: '100%',
-      background: 'linear-gradient(to top, white, #06a3b8)'
+      background: `linear-gradient(to top, ${theme.palette.common.white}, ${theme.palette.primary.main})`
     },
 
     title: {
@@ -46,6 +47,7 @@ const Index = () => {
     searchBox: {
       width: '100%',
       fontSize: '50px',
+      borderColor: theme.palette.common.white,
       [theme.breakpoints.down('md')]: {
         width: '100%',
         marginBottom: theme.spacing(1)
@@ -66,56 +68,83 @@ const Index = () => {
   const { t, i18n } = useTranslation();
   const [selectedDate, setSelectedDate] = useState(null);
 
+  const options = top100Films.map((option) => {
+    const firstLetter = option.title[0].toUpperCase();
+    return {
+      firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+      ...option,
+    };
+  });
+
   return (
     <div>
       <Box
         className={classes.headerBox}
         component='div'>
-          <Container>
+        <Container>
+          <Grow
+            in={true}>
             <Typography
               className={classes.title}
               component='div'
               variant="h1">
-                Find the right health service for your needs!
+                {t('home-title')}
             </Typography>
+          </Grow>
 
+          <Grow
+            in={true}
+            style={{ transformOrigin: '0 0 0' }}
+            {...(true ? { timeout: 1000 } : {})}>
             <Typography
               className={classes.subtitle}
               component='div'
               variant="subtitle">
-                Top results guaranteed for each search
+                {t('home-subtitle')}
             </Typography>
-          </Container>
+          </Grow>
+        </Container>
       </Box>
 
+      { /* Consider using asynchronous autocomplete, highlight, suggestion */}
       <Container>
         <Grid direction='row' container spacing={0}>
           <Grid item md={3} xs={12}>
-            <TextField
-              className={classes.searchBox}
-              variant='outlined'
-              autoComplete='off'
-              label='Name, speciality, illness'
-              InputProps={{
-                endAdornment: <InputAdornment position="end"><MasksTwoToneIcon /></InputAdornment>,
-              }} />
+            <Autocomplete
+              freeSolo
+              autoHighlight = {true}
+              options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+              groupBy={(option) => option.firstLetter}
+              getOptionLabel={(option) => option.title}
+              renderInput={(params) =>
+                <TextField
+                  {...params}
+                  className={classes.searchBox}
+                  variant='outlined'
+                  label={t('name-speciality-illness')} />
+              } />
           </Grid>
 
           <Grid item md={3} xs={12}>
-            <TextField
-              className={classes.searchBox}
-              variant='outlined'
-              autoComplete='off'
-              label='Location'
-              InputProps={{
-                endAdornment: <InputAdornment position="end"><LocationOnTwoToneIcon /></InputAdornment>,
-              }} />
+            <Autocomplete
+              freeSolo
+              options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+              groupBy={(option) => option.firstLetter}
+              getOptionLabel={(option) => option.title}
+              renderInput={(params) =>
+                <TextField
+                  {...params}
+                  className={classes.searchBox}
+                  variant='outlined'
+                  label={t('location')} />
+            } />
           </Grid>
 
           <Grid item md={3} xs={12}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
-                label='Availability Date'
+                disablePast
+                label={t('availability-date')}
                 value={selectedDate}
                 onChange={(newValue) => {
                   setSelectedDate(newValue);
@@ -134,16 +163,11 @@ const Index = () => {
               className={classes.searchButton}
               variant='contained'
               startIcon={<SearchIcon />} >
-              Search
+              {t('search')}
             </Button>
           </Grid>
         </Grid>
       </Container>
-
-      <Typography>
-        {t('')}
-      </Typography>
-
     </div>
   );
 }

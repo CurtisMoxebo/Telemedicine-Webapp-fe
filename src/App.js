@@ -7,9 +7,18 @@ import { createTheme, ThemeProvider } from '@mui/material';
 
 const defaultTheme = createTheme({
   palette: {
+    mode: 'light',
     primary: {
       main: '#06a3b8',
+      light: '#64EDFF',
       dark: '#048394'
+    },
+
+    /* background: {
+      paper: '#048394'
+    }, */
+    action: {
+      hover: 'rgba(100, 237, 255, 0.3)'
     }
   },
   typography: {
@@ -18,8 +27,27 @@ const defaultTheme = createTheme({
   }
 });
 
-const blackTheme = createTheme({
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#000000',
+      light: '#64EDFF',
+      dark: '#048394'
+    },
 
+    /* background: {
+      paper: '#048394'
+    }, */
+    action: {
+      hover: 'rgba(100, 237, 255, 0.3)'
+    }
+  },
+
+  typography: {
+    htmlFontSize: 16,
+    fontFamily: 'Futura, Bold, Souvenir'
+  }
 });
 
 const App = () => {

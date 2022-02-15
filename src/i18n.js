@@ -7,7 +7,7 @@ import * as de from "./locales/de/translation.json";
 import * as fr from "./locales/fr/translation.json";
 
 // utility functions
-import userLanguage from "./Utils/Utils.js";
+import { userLanguage } from "./Utils/Utils";
 
 i18n
   .use(initReactI18next)
