@@ -51,7 +51,7 @@ const SearchFiels = () => {
         <Grid item md={3} xs={12}>
           <Autocomplete
             freeSolo
-            autoHighlight = {true}
+            autoHighlight
             options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
             groupBy={(option) => option.firstLetter}
             getOptionLabel={(option) => option.title}
@@ -67,6 +67,7 @@ const SearchFiels = () => {
         <Grid item md={3} xs={12}>
           <Autocomplete
             freeSolo
+            autoHighlight
             options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
             groupBy={(option) => option.firstLetter}
             getOptionLabel={(option) => option.title}
