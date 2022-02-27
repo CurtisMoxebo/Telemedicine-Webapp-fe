@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Box, Container, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
@@ -14,6 +15,7 @@ const Footer = () => {
   }));
 
   const classes = useStyles();
+  const { t, i18n } = useTranslation();
 
   return (
     <Box
@@ -21,7 +23,7 @@ const Footer = () => {
       component='footer'>
       <Container>
         <Typography>
-          Copyright &copy; {new Date().getFullYear()}, TWB
+          {t('copyright', { copy:'\u00A9', year: new Date().getFullYear() })}
         </Typography>
       </Container>
     </Box>

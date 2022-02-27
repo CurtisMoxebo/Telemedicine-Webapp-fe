@@ -1,5 +1,19 @@
 {
   "translation": {
-    "first translation": "première traduction"
+    "availability-date": "Date de disponibilité",
+    "contact": "Contact",
+    "copyright": "Droits d'auteur {{copy}} {{year}}, TW",
+    "de": "De",
+    "en": "En",
+    "fr": "Fr",
+    "home": "Accueil",
+    "home-title": "Trouvez le service de santé adapté à vos besoins !",
+    "home-subtitle": "Meilleurs résultats garantis pour chaque recherche",
+    "location": "Emplacement",
+    "login": "Connexion",
+    "name-speciality-illness": "Nom, Spécialité, Maladie",
+    "search": "Chercher",
+    "settings": "paramètres",
+    "sign-up": "S'inscrire"
   }
 }
